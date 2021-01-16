@@ -15,7 +15,7 @@ on:
   
 env:
  
- DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
+ DOCKER_PASSWORD: ${{ secrets.TOKEN }} 
  #HOST: ${{ secrets.SERVER_IP }}
  #USERNAME: ${{ secrets.SERVER_USERNAME }}
  #PASSWORD: ${{ secrets.SERVER_PASSWORD }}
@@ -42,13 +42,14 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
-          username: shakaishi
+          username: 3-Hydroxytyramine
           password: $DOCKER_PASSWORD
       -
         name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
+          registry: ghcr.io  
           push: true
           tags: 3-Hydroxytyramine/dpidemo:latest
           
