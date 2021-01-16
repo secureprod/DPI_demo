@@ -11,7 +11,7 @@ RUN	apt-get update \
 	&& apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y
 RUN mkdir /build
 
-ADD DPI_demo/build.sh /build/build.sh
+ADD build.sh /build/build.sh
 RUN chmod +x /build/build.sh
 
 
