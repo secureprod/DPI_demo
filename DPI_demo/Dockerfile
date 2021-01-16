@@ -1,12 +1,24 @@
-FROM opensuse/leap
+FROM ubuntu:14.04.4
 
-RUN zypper --non-interactive ref \
-	&& zypper --non-interactive install --type pattern devel_basis devel_C_C++ devel_kernel \
-	&& zypper --non-interactive install libxtables-devel libnetfilter_conntrack-devel xtables-addons libjson-c-devel \
-	&& zypper --non-interactive install kernel-default kernel-default-devel kmod \
-	&& zypper --non-interactive install libpcap-devel git \
-	&& zypper --non-interactive clean
+MAINTAINER John Lin <linton.tw@gmail.com>
 
-RUN mkdir /build
-VOLUME /build
-CMD ["/build/build.sh"]
+ENV HOME /root
+# Define working directory.
+WORKDIR /root
+
+RUN apt-get update && \
+    apt-get install -y \
+        build-essential \
+        autoconf \
+        libtool \
+        gawk \
+        libpcap-dev \
+        curl \
+        vim
+
+RUN curl -kL https://github.com/ntop/nDPI/archive/1.8-stable.tar.gz | tar -xvz && \
+    cd /root/nDPI-1.8-stable && \
+    ./autogen.sh && \
+    ./configure &&  \
+    make && \
+    make install
