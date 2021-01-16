@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to docker.io
-        run:  echo $DOCKER_PASSWORD | docker login https://docker.pkg.github.com -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+        run:  echo $DOCKER_PASSWORD | docker login https://docker.pkg.github.com -u 3-Hydroxytyramine --password-stdin
       - uses: actions/checkout@master
       - name: Build image
         run: docker build -t docker.pkg.github.com/3-Hydroxytyramine/dpidemo:last  -f Dockerfile .
