@@ -17,9 +17,9 @@ env:
  LOGIN: ${{ secrets.DOCKER_LOGIN }}
  NAME: ${{ secrets.DOCKER_NAME }}
  DOCKER_PASSWORD: ${{ secrets.TOKEN }} 
- HOST: ${{ secrets.SERVER_IP }}
- USERNAME: ${{ secrets.SERVER_USERNAME }}
- PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+ #HOST: ${{ secrets.SERVER_IP }}
+ #USERNAME: ${{ secrets.SERVER_USERNAME }}
+ #PASSWORD: ${{ secrets.SERVER_PASSWORD }}
  #DEV_DB_USER_NAME: ${{ secrets.DEV_DB_USER_NAME }}
  #DEV_DB_NAME: ${{ secrets.DEV_DB_NAME }}
  #DEV_DB_PASSWORD: ${{ secrets.DEV_DB_PASSWORD }}
@@ -44,19 +44,19 @@ jobs:
       
       
         
-  deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
+  #deploy:
+    #needs: [build]
+    #runs-on: ubuntu-latest
+    #steps:
       
-    - name: Push to server
-      uses: appleboy/ssh-action@master
-      with:
-         host: $HOST
-         username: $USERNAME
-         password: $PASSWORD
-         port: 22
-         script: docker run 
+    #- name: Push to server
+      #uses: appleboy/ssh-action@master
+      #with:
+         #host: $HOST
+         #username: $USERNAME
+         #password: $PASSWORD
+         #port: 22
+         #script: docker run 
 
     
       
