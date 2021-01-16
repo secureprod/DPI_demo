@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to docker.io
-        run:  echo ${{ secrets.DOCKER_PASSWORD }} | docker login https://docker.pkg.github.com -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+        run:  echo $DOCKER_PASSWORD | docker login https://docker.pkg.github.com -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
       - uses: actions/checkout@master
       - name: Build image
         run: docker build -t docker.pkg.github.com/$LOGIN/$NAME:last  -f Dockerfile .
