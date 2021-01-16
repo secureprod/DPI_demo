@@ -36,7 +36,7 @@ jobs:
         run:  echo $DOCKER_PASSWORD | docker login https://docker.pkg.github.com -u 3-Hydroxytyramine --password-stdin
       - uses: actions/checkout@master
       - name: Build image
-        run: docker build -t docker.pkg.github.com/3-Hydroxytyramine/dpidemo:last  -f Dockerfile .
+        run: docker build -t 3-Hydroxytyramine/dpidemo:last  -f Dockerfile .
       
       - name: Push image to docker.io
         run: docker push docker.pkg.github.com/3-Hydroxytyramine/dpidemo:last
