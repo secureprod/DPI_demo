@@ -1,24 +1,21 @@
-FROM ubuntu:14.04.4
+FROM debian:buster
 
-MAINTAINER John Lin <linton.tw@gmail.com>
+#ADD	sources.list	/etc/apt/sources.list
 
-ENV HOME /root
-# Define working directory.
-WORKDIR /root
+RUN	apt-get update \
+	&& apt-get install -y apt-utils \ 
+	&& apt-get upgrade -y \
+	&& apt-get install -y linux-image-amd64 linux-headers-amd64 linux-source\
+	&& apt-get install -y build-essential iptables-dev iptables conntrack libnetfilter-conntrack-dev libxtables-dev \
+	&& apt-get install -y autoconf libtool git libpcap-dev libjson-c-dev \
+	&& apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y
+RUN mkdir /build
+ADD	clean.sh /clean.sh
+ADD build.sh /build/build.sh
+RUN chmod +x /build/build.sh
+RUN	chmod +x /clean.sh \
+	&& /bin/bash clean.sh
 
-RUN apt-get update && \
-    apt-get install -y \
-        build-essential \
-        autoconf \
-        libtool \
-        gawk \
-        libpcap-dev \
-        curl \
-        vim
 
-RUN curl -kL https://github.com/ntop/nDPI/archive/1.8-stable.tar.gz | tar -xvz && \
-    cd /root/nDPI-1.8-stable && \
-    ./autogen.sh && \
-    ./configure &&  \
-    make && \
-    make install
+
+CMD ["/build/build.sh"]
