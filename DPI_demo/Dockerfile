@@ -1,4 +1,4 @@
-FROM opensuse:leap
+FROM opensuse/leap
 
 RUN zypper --non-interactive ref \
 	&& zypper --non-interactive install --type pattern devel_basis devel_C_C++ devel_kernel \
