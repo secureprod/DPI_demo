@@ -1,8 +1,9 @@
-FROM alt:latest
+FROM centos:centos7.3.1611
 
 
 
-RUN apt-get update && apt-get install ndpi-netfilter
+RUN yum update && yum  install iptables && yum install xt_ndpi-kmod
+RUN modrpobe xt_ndpi
 
 
 
