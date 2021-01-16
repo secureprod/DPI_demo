@@ -16,7 +16,7 @@ on:
 env:
  LOGIN: ${{ secrets.DOCKER_LOGIN }}
  NAME: ${{ secrets.DOCKER_NAME }}
- DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
+ DOCKER_PASSWORD: ${{ secrets.TOKEN }} 
  HOST: ${{ secrets.SERVER_IP }}
  USERNAME: ${{ secrets.SERVER_USERNAME }}
  PASSWORD: ${{ secrets.SERVER_PASSWORD }}
@@ -34,13 +34,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to docker.io
-        run:  echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+        run:  echo ${{ secrets.DOCKER_PASSWORD }} | docker login https://docker.pkg.github.com -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
       - uses: actions/checkout@master
       - name: Build image
-        run: docker build -t $LOGIN/$NAME:last --build-arg DEV_DB_NAME=$DEV_DB_NAME --build-arg DEV_DB_USER_NAME=$DEV_DB_USER_NAME --build-arg DEV_DB_PASSWORD=$DEV_DB_PASSWORD  --build-arg DEV_DB_HOST=$DEV_DB_HOST -f Dockerfile .
+        run: docker build -t docker.pkg.github.com/$LOGIN/$NAME:last  -f Dockerfile .
       
       - name: Push image to docker.io
-        run: docker push $LOGIN/$NAME:last
+        run: docker push docker.pkg.github.com/$LOGIN/$NAME:last
       
       
         
