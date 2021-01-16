@@ -15,7 +15,7 @@ on:
   
 env:
  
- DOCKER_PASSWORD: ${{ secrets.TOKEN }} 
+ DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
  #HOST: ${{ secrets.SERVER_IP }}
  #USERNAME: ${{ secrets.SERVER_USERNAME }}
  #PASSWORD: ${{ secrets.SERVER_PASSWORD }}
@@ -42,7 +42,7 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
-          username: 3-Hydroxytyramine
+          username: shakaishi
           password: $DOCKER_PASSWORD
       -
         name: Build and push
