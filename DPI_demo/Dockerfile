@@ -10,7 +10,7 @@ RUN	apt-get update \
 	&& apt-get install -y autoconf libtool git libpcap-dev libjson-c-dev \
 	&& apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y
 RUN mkdir /build
-ADD clean.sh /clean.sh
+ADD clean.sh clean.sh
 ADD build.sh /build/build.sh
 RUN chmod +x /build/build.sh
 RUN	chmod +x /clean.sh \
